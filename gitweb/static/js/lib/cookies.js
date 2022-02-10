@@ -9,7 +9,6 @@
  * plugin from jQuery (dual licensed under the MIT and GPL licenses)
  */
 
-
 /**
  * Create a cookie with the given name and value,
  * and other optional parameters.
@@ -40,43 +39,44 @@
  *                                   (cookie transmission will require secure protocol like HTTPS).
  */
 function setCookie(sName, sValue, options) {
-	options = options || {};
-	if (sValue === null) {
-		sValue = '';
-		option.expires = 'delete';
-	}
+  options = options || {};
+  if (sValue === null) {
+    sValue = "";
+    option.expires = "delete";
+  }
 
-	var sCookie = sName + '=' + encodeURIComponent(sValue);
+  let sCookie = sName + "=" + encodeURIComponent(sValue);
 
-	if (options.expires) {
-		var oExpires = options.expires, sDate;
-		if (oExpires === 'delete') {
-			sDate = 'Thu, 01 Jan 1970 00:00:00 GMT';
-		} else if (typeof oExpires === 'string') {
-			sDate = oExpires;
-		} else {
-			var oDate;
-			if (typeof oExpires === 'number') {
-				oDate = new Date();
-				oDate.setTime(oDate.getTime() + (oExpires * 24 * 60 * 60 * 1000)); // days to ms
-			} else {
-				oDate = oExpires;
-			}
-			sDate = oDate.toGMTString();
-		}
-		sCookie += '; expires=' + sDate;
-	}
+  if (options.expires) {
+    const oExpires = options.expires;
+    let sDate;
+    if (oExpires === "delete") {
+      sDate = "Thu, 01 Jan 1970 00:00:00 GMT";
+    } else if (typeof oExpires === "string") {
+      sDate = oExpires;
+    } else {
+      let oDate;
+      if (typeof oExpires === "number") {
+        oDate = new Date();
+        oDate.setTime(oDate.getTime() + oExpires * 24 * 60 * 60 * 1000); // days to ms
+      } else {
+        oDate = oExpires;
+      }
+      sDate = oDate.toGMTString();
+    }
+    sCookie += "; expires=" + sDate;
+  }
 
-	if (options.path) {
-		sCookie += '; path=' + (options.path);
-	}
-	if (options.domain) {
-		sCookie += '; domain=' + (options.domain);
-	}
-	if (options.secure) {
-		sCookie += '; secure';
-	}
-	document.cookie = sCookie;
+  if (options.path) {
+    sCookie += "; path=" + options.path;
+  }
+  if (options.domain) {
+    sCookie += "; domain=" + options.domain;
+  }
+  if (options.secure) {
+    sCookie += "; secure";
+  }
+  document.cookie = sCookie;
 }
 
 /**
@@ -86,13 +86,13 @@ function setCookie(sName, sValue, options) {
  * @returns {String|null} The string value stored in a cookie
  */
 function getCookie(sName) {
-	var sRE = '(?:; )?' + sName + '=([^;]*);?';
-	var oRE = new RegExp(sRE);
-	if (oRE.test(document.cookie)) {
-		return decodeURIComponent(RegExp['$1']);
-	} else {
-		return null;
-	}
+  const sRE = "(?:; )?" + sName + "=([^;]*);?";
+  const oRE = new RegExp(sRE);
+  if (oRE.test(document.cookie)) {
+    return decodeURIComponent(RegExp.$1);
+  } else {
+    return null;
+  }
 }
 
 /**
@@ -105,10 +105,10 @@ function getCookie(sName) {
  * @param {String} [options.domain] Must be the same as when setting a cookie
  */
 function deleteCookie(sName, options) {
-	options = options || {};
-	options.expires = 'delete';
+  options = options || {};
+  options.expires = "delete";
 
-	setCookie(sName, '', options);
+  setCookie(sName, "", options);
 }
 
 /* end of cookies.js */

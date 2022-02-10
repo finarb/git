@@ -19,22 +19,22 @@ module Git
           "<citerefentry>\n" \
             "<refentrytitle>#{target}</refentrytitle>" \
             "<manvolnum>#{attrs[1]}</manvolnum>\n" \
-          "</citerefentry>"
+          '</citerefentry>'
         end
       end
     end
 
     class DocumentPostProcessor < Asciidoctor::Extensions::Postprocessor
-      def process document, output
+      def process(document, output)
         if document.basebackend? 'docbook'
           mansource = document.attributes['mansource']
           manversion = document.attributes['manversion']
           manmanual = document.attributes['manmanual']
-          new_tags = "" \
+          new_tags = '' \
             "<refmiscinfo class=\"source\">#{mansource}</refmiscinfo>\n" \
             "<refmiscinfo class=\"version\">#{manversion}</refmiscinfo>\n" \
             "<refmiscinfo class=\"manual\">#{manmanual}</refmiscinfo>\n"
-          output = output.sub(/<\/refmeta>/, new_tags + "</refmeta>")
+          output = output.sub(%r{</refmeta>}, new_tags + '</refmeta>')
         end
         output
       end
