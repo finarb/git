@@ -8,9 +8,9 @@ span.strong {
 }
 
 body blockquote {
-  margin-top: .75em;
+  margin-top: 0.75em;
   line-height: 1.5;
-  margin-bottom: .75em;
+  margin-bottom: 0.75em;
 }
 
 html body {
@@ -23,12 +23,16 @@ body div {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 div.toc p b,
 div.list-of-figures p b,
 div.list-of-tables p b,
-div.abstract p.title
-{
+div.abstract p.title {
   color: #527bbd;
   font-family: tahoma, verdana, sans-serif;
 }
@@ -36,13 +40,12 @@ div.abstract p.title
 div.toc p:first-child,
 div.list-of-figures p:first-child,
 div.list-of-tables p:first-child,
-div.example p.title
-{
+div.example p.title {
   margin-bottom: 0.2em;
 }
 
 body h1 {
-  margin: .0em 0 0 -4%;
+  margin: 0em 0 0 -4%;
   line-height: 1.3;
   border-bottom: 2px solid silver;
 }
@@ -54,22 +57,22 @@ body h2 {
 }
 
 body h3 {
-  margin: .8em 0 0 -3%;
+  margin: 0.8em 0 0 -3%;
   line-height: 1.3;
 }
 
 body h4 {
-  margin: .8em 0 0 -3%;
+  margin: 0.8em 0 0 -3%;
   line-height: 1.3;
 }
 
 body h5 {
-  margin: .8em 0 0 -2%;
+  margin: 0.8em 0 0 -2%;
   line-height: 1.3;
 }
 
 body h6 {
-  margin: .8em 0 0 -1%;
+  margin: 0.8em 0 0 -1%;
   line-height: 1.3;
 }
 
@@ -80,16 +83,20 @@ div.footnotes hr {
   border: 1px solid silver;
 }
 
-div.navheader th, div.navheader td, div.navfooter td {
+div.navheader th,
+div.navheader td,
+div.navfooter td {
   font-family: sans-serif;
   font-size: 0.9em;
   font-weight: bold;
   color: #527bbd;
 }
-div.navheader img, div.navfooter img {
+div.navheader img,
+div.navfooter img {
   border-style: none;
 }
-div.navheader a, div.navfooter a {
+div.navheader a,
+div.navfooter a {
   font-weight: normal;
 }
 div.navfooter hr {
@@ -97,7 +104,7 @@ div.navfooter hr {
 }
 
 body td {
-  line-height: 1.2
+  line-height: 1.2;
 }
 
 body th {
@@ -108,7 +115,9 @@ ol {
   line-height: 1.2;
 }
 
-ul, body dir, body menu {
+ul,
+body dir,
+body menu {
   line-height: 1.2;
 }
 
@@ -117,23 +126,33 @@ html {
   padding: 0;
 }
 
-body h1, body h2, body h3, body h4, body h5, body h6 {
-  margin-left: 0
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  margin-left: 0;
 }
 
 body pre {
   margin: 0.5em 10% 0.5em 1em;
-  line-height: 1.0;
+  line-height: 1;
   color: navy;
 }
 
-tt.literal, code.literal {
+tt.literal,
+code.literal {
   color: navy;
   font-family: sans-serif;
 }
 
-code.literal:before { content: "'"; }
-code.literal:after { content: "'"; }
+code.literal:before {
+  content: "'";
+}
+code.literal:after {
+  content: "'";
+}
 
 em {
   font-style: italic;
@@ -154,7 +173,8 @@ div.literallayout {
   padding: 0.5em;
 }
 
-.programlisting, .screen {
+.programlisting,
+.screen {
   border: 1px solid silver;
   background: #f4f4f4;
   margin: 0.5em 10% 0.5em 0;
@@ -163,12 +183,16 @@ div.literallayout {
 
 div.sidebar {
   background: #ffffee;
-  margin: 1.0em 10% 0.5em 0;
+  margin: 1em 10% 0.5em 0;
   padding: 0.5em 1em;
   border: 1px solid silver;
 }
-div.sidebar * { padding: 0; }
-div.sidebar div { margin: 0; }
+div.sidebar * {
+  padding: 0;
+}
+div.sidebar div {
+  margin: 0;
+}
 div.sidebar p.title {
   font-family: sans-serif;
   margin-top: 0.5em;
@@ -187,7 +211,7 @@ div.glossary dd p {
 }
 
 dl {
-  margin: .8em 0;
+  margin: 0.8em 0;
   line-height: 1.2;
 }
 
@@ -204,23 +228,25 @@ div.variablelist dd p {
   margin-top: 0;
 }
 
-div.itemizedlist li, div.orderedlist li {
+div.itemizedlist li,
+div.orderedlist li {
   margin-left: -0.8em;
   margin-top: 0.5em;
 }
 
-ul, ol {
-    list-style-position: outside;
+ul,
+ol {
+  list-style-position: outside;
 }
 
-div.sidebar ul, div.sidebar ol {
-    margin-left: 2.8em;
+div.sidebar ul,
+div.sidebar ol {
+  margin-left: 2.8em;
 }
 
 div.itemizedlist p.title,
 div.orderedlist p.title,
-div.variablelist p.title
-{
+div.variablelist p.title {
   margin-bottom: -0.8em;
 }
 
@@ -238,11 +264,14 @@ div.revhistory td {
 }
 
 /* Keep TOC and index lines close together. */
-div.toc dl, div.toc dt,
-div.list-of-figures dl, div.list-of-figures dt,
-div.list-of-tables dl, div.list-of-tables dt,
-div.indexdiv dl, div.indexdiv dt
-{
+div.toc dl,
+div.toc dt,
+div.list-of-figures dl,
+div.list-of-figures dt,
+div.list-of-tables dl,
+div.list-of-tables dt,
+div.indexdiv dl,
+div.indexdiv dt {
   line-height: normal;
   margin-top: 0;
   margin-bottom: 0;
@@ -253,44 +282,44 @@ div.indexdiv dl, div.indexdiv dt
   generated HTML.
 */
 div.table table,
-div.informaltable table
-{
-    margin-left: 0;
-    margin-right: 5%;
-    margin-bottom: 0.8em;
+div.informaltable table {
+  margin-left: 0;
+  margin-right: 5%;
+  margin-bottom: 0.8em;
 }
-div.informaltable table
-{
-    margin-top: 0.4em
+div.informaltable table {
+  margin-top: 0.4em;
 }
 div.table thead,
 div.table tfoot,
 div.table tbody,
 div.informaltable thead,
 div.informaltable tfoot,
-div.informaltable tbody
-{
-    /* No effect in IE6. */
-    border-top: 2px solid #527bbd;
-    border-bottom: 2px solid #527bbd;
+div.informaltable tbody {
+  /* No effect in IE6. */
+  border-top: 2px solid #527bbd;
+  border-bottom: 2px solid #527bbd;
 }
-div.table thead, div.table tfoot,
-div.informaltable thead, div.informaltable tfoot
-{
-    font-weight: bold;
+div.table thead,
+div.table tfoot,
+div.informaltable thead,
+div.informaltable tfoot {
+  font-weight: bold;
 }
 
 div.mediaobject img {
-    border: 1px solid silver;
-    margin-bottom: 0.8em;
+  border: 1px solid silver;
+  margin-bottom: 0.8em;
 }
 div.figure p.title,
-div.table p.title
-{
+div.table p.title {
   margin-top: 1em;
   margin-bottom: 0.4em;
 }
 
 @media print {
-  div.navheader, div.navfooter { display: none; }
+  div.navheader,
+  div.navfooter {
+    display: none;
+  }
 }

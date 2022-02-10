@@ -1,5 +1,4 @@
-Configuration for VS Code
-=========================
+# Configuration for VS Code
 
 [VS Code](https://code.visualstudio.com/) is a lightweight but powerful source
 code editor which runs on your desktop and is available for

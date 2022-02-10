@@ -18,14 +18,18 @@
     along with this program; if not, see <http://www.gnu.org/licenses/>.
 """
 
-import os, os.path, sys
-import tempfile, pickle, getopt
+import os
+import os.path
+import sys
+import tempfile
+import pickle
+import getopt
 import re
 
 if sys.hexversion < 0x02030000:
-   # The behavior of the pickle module changed significantly in 2.3
-   sys.stderr.write("hg-to-git.py: requires Python 2.3 or later.\n")
-   sys.exit(1)
+    # The behavior of the pickle module changed significantly in 2.3
+    sys.stderr.write("hg-to-git.py: requires Python 2.3 or later.\n")
+    sys.exit(1)
 
 # Maps hg version -> git version
 hgvers = {}
@@ -38,11 +42,12 @@ hgbranch = {}
 # Number of new changesets converted from hg
 hgnewcsets = 0
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 
 def usage():
 
-        print("""\
+    print("""\
 %s: [OPTIONS] <hgprj>
 
 options:
@@ -56,7 +61,8 @@ required:
     hgprj:  name of the HG project to import (directory)
 """ % sys.argv[0])
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 
 def getgitenv(user, date):
     env = ''
@@ -76,14 +82,16 @@ def getgitenv(user, date):
     env += 'export GIT_COMMITTER_DATE="%s" ;' % date
     return env
 
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 
 state = ''
 opt_nrepack = 0
 verbose = False
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 's:t:n:v', ['gitstate=', 'tempdir=', 'nrepack=', 'verbose'])
+    opts, args = getopt.getopt(sys.argv[1:], 's:t:n:v', [
+                               'gitstate=', 'tempdir=', 'nrepack=', 'verbose'])
     for o, a in opts:
         if o in ('-s', '--gitstate'):
             state = a
@@ -125,16 +133,17 @@ hgparents["0"] = (None, None)
 hgbranch["0"] = "master"
 for cset in range(1, int(tip) + 1):
     hgchildren[str(cset)] = ()
-    prnts = os.popen('hg log -r %d --template "{parents}"' % cset).read().strip().split(' ')
+    prnts = os.popen(
+        'hg log -r %d --template "{parents}"' % cset).read().strip().split(' ')
     prnts = map(lambda x: x[:x.find(':')], prnts)
     if prnts[0] != '':
         parent = prnts[0].strip()
     else:
         parent = str(cset - 1)
-    hgchildren[parent] += ( str(cset), )
+    hgchildren[parent] += (str(cset), )
     if len(prnts) > 1:
         mparent = prnts[1].strip()
-        hgchildren[mparent] += ( str(cset), )
+        hgchildren[mparent] += (str(cset), )
     else:
         mparent = None
 
@@ -167,16 +176,18 @@ for cset in range(int(tip) + 1):
     hgnewcsets += 1
 
     # get info
-    log_data = os.popen('hg log -r %d --template "{tags}\n{date|date}\n{author}\n"' % cset).readlines()
+    log_data = os.popen(
+        'hg log -r %d --template "{tags}\n{date|date}\n{author}\n"' % cset).readlines()
     tag = log_data[0].strip()
     date = log_data[1].strip()
     user = log_data[2].strip()
     parent = hgparents[str(cset)][0]
     mparent = hgparents[str(cset)][1]
 
-    #get comment
+    # get comment
     (fdcomment, filecomment) = tempfile.mkstemp()
-    csetcomment = os.popen('hg log -r %d --template "{desc}"' % cset).read().strip()
+    csetcomment = os.popen(
+        'hg log -r %d --template "{desc}"' % cset).read().strip()
     os.write(fdcomment, csetcomment)
     os.close(fdcomment)
 
@@ -198,7 +209,8 @@ for cset in range(int(tip) + 1):
     if cset != 0:
         if hgbranch[str(cset)] == "branch-" + str(cset):
             print('creating new branch', hgbranch[str(cset)])
-            os.system('git checkout -b %s %s' % (hgbranch[str(cset)], hgvers[parent]))
+            os.system('git checkout -b %s %s' %
+                      (hgbranch[str(cset)], hgvers[parent]))
         else:
             print('checking out branch', hgbranch[str(cset)])
             os.system('git checkout %s' % hgbranch[str(cset)])
@@ -210,10 +222,12 @@ for cset in range(int(tip) + 1):
         else:
             otherbranch = hgbranch[parent]
         print('merging', otherbranch, 'into', hgbranch[str(cset)])
-        os.system(getgitenv(user, date) + 'git merge --no-commit -s ours "" %s %s' % (hgbranch[str(cset)], otherbranch))
+        os.system(getgitenv(user, date) + 'git merge --no-commit -s ours "" %s %s' %
+                  (hgbranch[str(cset)], otherbranch))
 
     # remove everything except .git and .hg directories
-    os.system('find . \( -path "./.hg" -o -path "./.git" \) -prune -o ! -name "." -print | xargs rm -rf')
+    os.system(
+        'find . \( -path "./.hg" -o -path "./.git" \) -prune -o ! -name "." -print | xargs rm -rf')
 
     # repopulate with checkouted files
     os.system('hg update -C %d' % cset)
@@ -224,7 +238,8 @@ for cset in range(int(tip) + 1):
     os.system('git ls-files -x .hg --deleted | git update-index --remove --stdin')
 
     # commit
-    os.system(getgitenv(user, date) + 'git commit --allow-empty --allow-empty-message -a -F %s' % filecomment)
+    os.system(getgitenv(user, date) +
+              'git commit --allow-empty --allow-empty-message -a -F %s' % filecomment)
     os.unlink(filecomment)
 
     # tag

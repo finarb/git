@@ -9,9 +9,8 @@ coordinates our localization effort in the l10 coordinator repository:
 
     https://github.com/git-l10n/git-po/
 
-The two character language translation codes are defined by ISO\_639-1, as
+The two character language translation codes are defined by ISO_639-1, as
 stated in the gettext(1) full manual, appendix A.1, Usual Language Codes.
-
 
 ## Contributing to an existing translation
 
@@ -26,7 +25,6 @@ distributions (such as from Ubuntu, etc.) have their own l10n workflow.
 For this case, wrong translations should be reported and fixed through
 their workflows.
 
-
 ## Creating a new language translation
 
 If you are the first contributor for the language XX, please fork this
@@ -37,7 +35,6 @@ If there are multiple contributors for the same language, please first
 coordinate among yourselves and nominate the team leader for your
 language, so that the l10n coordinator only needs to interact with one
 person per language.
-
 
 ## Core translation
 
@@ -66,7 +63,6 @@ git-po-helper update XX.po
 Edit "po/XX.po" by hand to fix "fuzzy" messages, which may have misplaced
 translated messages and duplicate messages.
 
-
 ## Translation Process Flow
 
 The overall data-flow looks like this:
@@ -90,14 +86,13 @@ The overall data-flow looks like this:
 - L10n coordinator pulls from Language team (3)
 - L10n coordinator asks the result to be pulled (4).
 
-
 ## Maintaining the "po/git.pot" file
 
 (This is done by the l10n coordinator).
 
 The "po/git.pot" file contains a message catalog extracted from Git's
 sources. The l10n coordinator maintains it by adding new translations with
-msginit(1), or update existing ones with msgmerge(1).  In order to update
+msginit(1), or update existing ones with msgmerge(1). In order to update
 the Git sources to extract the messages from, the l10n coordinator is
 expected to pull from the main git repository at strategic point in
 history (e.g. when a major release and release candidates are tagged),
@@ -105,7 +100,6 @@ and then run "make pot" at the top-level directory.
 
 Language contributors use this file to prepare translations for their
 language, but they are not expected to modify it.
-
 
 ## Initializing a "XX.po" file
 
@@ -118,8 +112,8 @@ you add a translation for the first time by running:
 msginit --locale=XX
 ```
 
-in the "po/" directory, where XX is the locale, e.g. "de", "is", "pt\_BR",
-"zh\_CN", etc.
+in the "po/" directory, where XX is the locale, e.g. "de", "is", "pt_BR",
+"zh_CN", etc.
 
 Then edit the automatically generated copyright info in your new "XX.po"
 to be correct, e.g. for Icelandic:
@@ -145,7 +139,6 @@ perl -pi -e 's/(?<="Project-Id-Version: )PACKAGE VERSION/Git/' XX.po
 Once you are done testing the translation (see below), commit the result
 and ask the l10n coordinator to pull from you.
 
-
 ## Updating a "XX.po" file
 
 (This is done by the language teams).
@@ -167,7 +160,6 @@ in the "po/" directory, where "XX.po" is the file you want to update.
 Once you are done testing the translation (see below), commit the result
 and ask the l10n coordinator to pull from you.
 
-
 ## Fuzzy translation
 
 Fuzzy translation is a translation marked by comment "fuzzy" to let you
@@ -178,7 +170,6 @@ marked automatically when running "msgmerge" to update your "XX.po" file.
 
 After fixing the corresponding translation, you must remove the "fuzzy"
 tag in the comment.
-
 
 ## Testing your changes
 
@@ -195,7 +186,6 @@ changed PO file with `msgfmt --check`, the --check option flags many
 common errors, e.g. missing printf format strings, or translated
 messages that deviate from the originals in whether they begin/end
 with a newline or not.
-
 
 ## Marking strings for translation
 
@@ -247,7 +237,6 @@ General advice:
 We provide wrappers for C, Shell and Perl programs. Here's how they're
 used:
 
-
 ### C
 
 Include builtin.h at the top, it'll pull in gettext.h, which
@@ -297,7 +286,6 @@ interface. We currently export these functions:
   string will be, but since it was already marked for translation
   with `N_()` the look-up in the message catalog will succeed.
 
-
 ### Shell
 
 The Git gettext shell interface is just a wrapper for
@@ -339,7 +327,6 @@ command to be translated) for examples is also useful:
 git log --reverse -p --grep=i18n git-am.sh
 ```
 
-
 ### Perl
 
 The Git::I18N module provides a limited subset of the
@@ -353,12 +340,10 @@ printf __("The following error occurred: %s\n"), $error;
 
 Run `perldoc perl/Git/I18N.pm` for more info.
 
-
 ## Testing marked strings
 
 Git's tests are run under `LANG=C LC_ALL=C`. So the tests do not need be
 changed to account for translations as they're added.
-
 
 ## PO helper
 
@@ -392,7 +377,6 @@ Usage for git-po-helper:
   ```
 
 Run "git-po-helper" without arguments to show usage.
-
 
 ## Conventions
 
@@ -429,7 +413,6 @@ There are some conventions that l10n contributors must follow:
   own workflow. See [Documentation/SubmittingPatches][] for
   instructions on how to contribute patches to these subsystems.
 
-
 To contribute for a new l10n language, contributor should follow
 additional conventions:
 
@@ -451,6 +434,5 @@ additional conventions:
   git-po-helper team --check
   ```
 
-
-[git-po-helper/README]: https://github.com/git-l10n/git-po-helper#readme
-[Documentation/SubmittingPatches]: Documentation/SubmittingPatches
+[git-po-helper/readme]: https://github.com/git-l10n/git-po-helper#readme
+[documentation/submittingpatches]: Documentation/SubmittingPatches

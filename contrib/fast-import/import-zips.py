@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-## zip archive frontend for git-fast-import
+# zip archive frontend for git-fast-import
 ##
-## For example:
+# For example:
 ##
-##  mkdir project; cd project; git init
-##  python import-zips.py *.zip
-##  git log --stat import-zips
+# mkdir project; cd project; git init
+# python import-zips.py *.zip
+# git log --stat import-zips
 
 from os import popen, path
 from sys import argv, exit, hexversion, stderr
@@ -27,9 +27,12 @@ committer_name = 'Z Ip Creator'
 committer_email = 'zip@example.com'
 
 fast_import = popen('git fast-import --quiet', 'w')
+
+
 def printlines(list):
     for str in list:
         fast_import.write(str + "\n")
+
 
 for zipfile in argv[1:]:
     commit_time = 0
@@ -55,24 +58,24 @@ for zipfile in argv[1:]:
         mark[name] = ':' + str(next_mark)
         next_mark += 1
 
-        printlines(('blob', 'mark ' + mark[name], \
+        printlines(('blob', 'mark ' + mark[name],
                     'data ' + str(info.file_size)))
         fast_import.write(zip.read(name) + "\n")
 
     committer = committer_name + ' <' + committer_email + '> %d +0000' % \
         mktime(commit_time + (0, 0, 0))
 
-    printlines(('commit ' + branch_ref, 'committer ' + committer, \
-        'data <<EOM', 'Imported from ' + zipfile + '.', 'EOM', \
-        '', 'deleteall'))
+    printlines(('commit ' + branch_ref, 'committer ' + committer,
+                'data <<EOM', 'Imported from ' + zipfile + '.', 'EOM',
+                '', 'deleteall'))
 
     for name in mark.keys():
         fast_import.write('M 100644 ' + mark[name] + ' ' +
-            name[len(common_prefix):] + "\n")
+                          name[len(common_prefix):] + "\n")
 
-    printlines(('',  'tag ' + path.basename(zipfile), \
-        'from ' + branch_ref, 'tagger ' + committer, \
-        'data <<EOM', 'Package ' + zipfile, 'EOM', ''))
+    printlines(('',  'tag ' + path.basename(zipfile),
+                'from ' + branch_ref, 'tagger ' + committer,
+                'data <<EOM', 'Package ' + zipfile, 'EOM', ''))
 
 if fast_import.close():
     exit(1)

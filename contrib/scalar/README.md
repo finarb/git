@@ -5,12 +5,12 @@ performance features in Git. Originally implemented in C# using .NET Core,
 based on the learnings from the VFS for Git project, most of the techniques
 developed by the Scalar project have been integrated into core Git already:
 
-* partial clone,
-* commit graphs,
-* multi-pack index,
-* sparse checkout (cone mode),
-* scheduled background maintenance,
-* etc
+- partial clone,
+- commit graphs,
+- multi-pack index,
+- sparse checkout (cone mode),
+- scheduled background maintenance,
+- etc
 
 This directory contains the remaining parts of Scalar that are not (yet) in
 core Git.
@@ -30,8 +30,7 @@ current plan involves the following patch series:
 
 - `scalar-diagnose`: The `scalar` command is taught the `diagnose` subcommand.
 
-- `scalar-and-builtin-fsmonitor`: The built-in FSMonitor is enabled in `scalar
-  register` and in `scalar clone`, for an enormous performance boost when
+- `scalar-and-builtin-fsmonitor`: The built-in FSMonitor is enabled in `scalar register` and in `scalar clone`, for an enormous performance boost when
   working in large worktrees. This patch series necessarily depends on Jeff
   Hostetler's FSMonitor patch series to be integrated into Git.
 
