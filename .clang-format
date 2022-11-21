@@ -8,7 +8,7 @@
 # stop to the next one.
 #
 # These settings are mirrored in .editorconfig.  Keep them in sync.
-UseTab: Always
+UseTab: Always 
 TabWidth: 8
 IndentWidth: 8
 ContinuationIndentWidth: 8
